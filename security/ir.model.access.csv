@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_booking_order_service_team,booking_order.service_team,model_booking_order_service_team,,1,1,1,1
+access_booking_order_sale_order,booking_order.sale_order,model_booking_order_sale_order,,1,1,1,1
+access_booking_order_work_order,booking_order.work_order,model_booking_order_work_order,,1,1,1,1
+access_booking_order_work_order_cancel,booking_order.work_order_cancel,model_booking_order_work_order_cancel,,1,1,1,1

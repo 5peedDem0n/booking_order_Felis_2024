@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="work_order_cancel_form" model="ir.ui.view">
+        <field name="name">work.order.cancel.form</field>
+        <field name="model">booking_order.work_order_cancel</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="note"/>
+                </group>
+                <footer>
+                    <button string="Confirm" type="object" name="confirm_cancel" class="btn-primary"/>
+                    <button string="Close" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

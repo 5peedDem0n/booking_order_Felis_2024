@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="work_order_form_view" model="ir.ui.view">
+            <field name="name">work.order.form.view</field>
+            <field name="model">booking_order.work_order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Start Work" name="generate_start_work" type="object" class="btn-primary"
+                            attrs="{'invisible': [('state','!=','pending')]}"
+                            />
+                        <button string="End Work" name="generate_end_work" type="object" class="btn btn-secondary"
+                            attrs="{'invisible': [('state','!=','progress')]}"
+                            />
+                        <button string="Reset" name="generate_reset_work" type="object" class="btn btn-secondary"
+                            attrs="{'invisible': [('state','!=','progress')]}"
+                            />
+                        <button string="Print" name="print_report" type="object" class="oe-highlight"/>
+                        <button string="Cancel" name="generate_cancel_work" type="object" class="btn btn-danger"/>
+                        
+                    </header>
+                    <sheet>
+                        <group>
+
+                            <field name="name"/>
+                            <field name="sale_order_id"/>
+                            <field name="team_id"/>
+                            <field name="team_leader_id"/>
+                            <field name="team_member_ids" widget="many2many_tags"/>
+                            <field name="start_plan"/>
+                            <field name="end_plan"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="state"/>
+                            <field name="note"/>
+                            
+                        </group>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="work_order_tree_view" model="ir.ui.view">
+            <field name="name">work.order.tree.view</field>
+            <field name="model">booking_order.work_order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="sale_order_id"/>
+                    <field name="team_id"/>
+                    <field name="team_leader_id"/>
+                    <field name="team_member_ids"/>
+                    <field name="start_plan"/>
+                    <field name="end_plan"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                    <field name="note"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="work_order_kanban_view" model="ir.ui.view" >
+            <field name="name">work.order.kanban.view</field>
+            <field name="model">booking_order.work_order</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="sale_order_id"/>
+                    <field name="team_id"/>
+                    <field name="team_leader_id"/>
+                    <field name="team_member_ids"/>
+                    <field name="start_plan"/>
+                    <field name="end_plan"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                    <field name="note"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6 pull-right text-right">
+                                        <strong><span><t t-esc="record.team_id.value"/></span></strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <span><t t-esc="record.state.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6 pull-right text-right">
+                                        <strong><span><t t-esc="record.team_leader_id.value"/></span></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="work_order_calendar_view" model="ir.ui.view">
+            <field name="name">work.order.kanban.view</field>
+            <field name="model">booking_order.work_order</field>
+            <field name="arch" type="xml">
+                <calendar string="Booking Calendar" color="name" date_start="start_date">
+                    <field name="name"/>
+                    <field name="team_id"/>
+                    <field name="team_leader_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="action_work_order" model="ir.actions.act_window">
+            <field name="name">Work Order</field>
+            <field name="res_model">booking_order.work_order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,calendar,pivot,graph,form</field>
+        </record>
+
+        <menuitem id="menu_work_order" action="action_work_order"
+            string="Work Order" parent="booking_order.menu_base_booking"
+            sequence="2" />
+
+    </data>
+</odoo>

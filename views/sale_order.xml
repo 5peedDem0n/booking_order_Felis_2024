@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="sale_order_form_view" model="ir.ui.view">
+            <field name="name">sale.order.form.view</field>
+            <field name="model">booking_order.sale_order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button id="button_confirm" string="Confirm" name="create_work_order" type="object" class="btn-primary btn-sm"/>
+                        <button id="button_check" string="Check" name="check_work_order" type="object" class="btn btn-secondary btn-sm"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="open_work_order" class="oe_stat_button" type="object" icon="fa-calendar">
+                                <field string="Work Order" name="work_order_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+
+                                <field name="start_book"/>
+                                <field name="end_book"/>
+
+                            </group>
+                            <group>
+
+                                <field name="team_id"/>
+                                <field name="team_leader_id"/>
+                                
+                            </group>
+
+                            <field name="is_booking_order" invisible="1"/>
+                            <field name="team_member_ids" widget="many2many_tags"/>
+                            
+                        </group>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="sale_order_tree_view" model="ir.ui.view">
+            <field name="name">sale.order.tree.view</field>
+            <field name="model">booking_order.sale_order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="is_booking_order" invisible="1"/>
+                    <field name="team_id"/>
+                    <field name="team_leader_id"/>
+                    <field name="team_member_ids"/>
+                    <field name="start_book"/>
+                    <field name="end_book"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_sale_order" model="ir.actions.act_window">
+            <field name="name">Booking Order</field>
+            <field name="res_model">booking_order.sale_order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_booking_order', '=', True)]</field>
+        </record>
+
+        <menuitem id="menu_sale_order" action="action_sale_order"
+            string="Booking Order" parent="booking_order.menu_base_booking"
+            sequence="1" />
+
+    </data>
+</odoo>
